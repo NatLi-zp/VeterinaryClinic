@@ -1,9 +1,6 @@
 package com.example.veterinaryclinicnew.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,7 +23,12 @@ public class Visit {
     @Column(name = "comment")
     private String comment;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "pet_id", referencedColumnName = "id")
     private Pet pet;
 
     @Override

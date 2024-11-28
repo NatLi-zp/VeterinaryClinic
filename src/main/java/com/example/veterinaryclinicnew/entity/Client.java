@@ -1,12 +1,10 @@
 package com.example.veterinaryclinicnew.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -22,7 +20,11 @@ public class Client {
     @Column(name = "name")
     private String name;
 
-    private Pet pet;
+    @OneToMany(mappedBy = "client")
+    private List<Pet> pet;
+
+    @OneToMany(mappedBy = "client")
+    private List<Visit> visit;
 
     @Override
     public boolean equals(Object o) {

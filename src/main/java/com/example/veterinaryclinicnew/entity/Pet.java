@@ -1,12 +1,10 @@
 package com.example.veterinaryclinicnew.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -16,11 +14,20 @@ import java.util.Objects;
 public class Pet {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
     @Column(name = "name")
     private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "visit_id", referencedColumnName = "id")
+    private Visit visit;
 
     @Override
     public boolean equals(Object o) {
