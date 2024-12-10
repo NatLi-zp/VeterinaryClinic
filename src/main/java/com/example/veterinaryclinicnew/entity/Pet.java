@@ -1,7 +1,9 @@
 package com.example.veterinaryclinicnew.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "pets")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pet {
 
     @Id
@@ -25,9 +29,9 @@ public class Pet {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-    @ManyToOne
-    @JoinColumn(name = "visit_id", referencedColumnName = "id")
-    private Visit visit;
+//    @ManyToOne
+//    @JoinColumn(name = "visit_id", referencedColumnName = "id")
+//    private Visit visit;
 
     @Override
     public boolean equals(Object o) {

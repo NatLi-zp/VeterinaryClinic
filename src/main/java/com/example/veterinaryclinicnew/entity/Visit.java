@@ -1,7 +1,9 @@
 package com.example.veterinaryclinicnew.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,8 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "visits")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Visit {
 
     @Id

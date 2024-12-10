@@ -1,7 +1,10 @@
 package com.example.veterinaryclinicnew.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.Objects;
 @Setter
 @Entity
 @Table(name = "clients")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Client {
 
     @Id
@@ -20,9 +25,11 @@ public class Client {
     @Column(name = "name")
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Pet> pet;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Visit> visit;
 
