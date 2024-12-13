@@ -1,8 +1,9 @@
 package com.example.veterinaryclinicnew.service;
 
+import com.example.veterinaryclinicnew.dto.ClientDto;
 import com.example.veterinaryclinicnew.entity.Client;
 import com.example.veterinaryclinicnew.exeption.ClientDoesntExistException;
-import com.example.veterinaryclinicnew.exeption.error_messages.ErrorMessage;
+import com.example.veterinaryclinicnew.exeption.error_messages.ClientErrorMessage;
 import com.example.veterinaryclinicnew.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ClientServiceImpl implements ClientService {
     public Client getClientById(int id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (!optionalClient.isPresent()) {
-            throw new ClientDoesntExistException(ErrorMessage.CLIENT_NOT_EXIST);
+            throw new ClientDoesntExistException(ClientErrorMessage.CLIENT_NOT_EXIST);
         }
         System.out.println("Client: " + optionalClient.get());
         Client client = optionalClient.get();
@@ -32,27 +33,41 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> getAllClients() {
         List<Client> clientsEntities = clientRepository.findAll();
         return clientsEntities.stream()
-                .map(entity -> new Client(entity.getId(), entity.getName(), entity.getPet(), entity.getVisit()))
+                //       .map(entity -> new Client(entity.getId(), entity.getName(), entity.getPet(), entity.getVisit()))
+                .map(entity -> new Client(entity.getId(), entity.getName()))
                 .collect(Collectors.toList());
     }
 
 
     @Override
-    public boolean createClients(Client newClient) {
-        Client createClientEntity = new Client(0, newClient.getName(), newClient.getPet(), newClient.getVisit());
-        Client returnPClient = clientRepository.save(createClientEntity);
-        return createClientEntity.getId() != 0;
-
+    public ClientDto createClients(ClientDto newClient) {
+        //Client createClientEntity = new Client(0, newClient.getName(), newClient.getPet(), newClient.getVisit());
+        Client createClientEntity = new Client(); //null, newClient.getName());
+        createClientEntity.setName(newClient.getName());
+        createClientEntity.setId(100);
+        Client returnClient = clientRepository.save(createClientEntity);
+        //return returnClient;
+        //return new ClientDto(returnClient.getId(), returnClient.getName());
+        ClientDto clientDto = new ClientDto();
+        clientDto.setName(returnClient.getName());
+        return clientDto;
     }
 
     @Override
-    public Client updateClients(Client updClient) {
-        Client updateClientEntity = new Client(updClient.getId(), updClient.getName(), updClient.getPet(), updClient.getVisit());
+    public ClientDto updateClients(ClientDto updClient) {
+        // Client updateClientEntity = new Client(updClient.getId(), updClient.getName(), updClient.getPet(), updClient.getVisit());
+     //   Client updateClientEntity = new Client(updClient.getId(), updClient.getName());
+        Client updateClientEntity = new Client();
+        updateClientEntity.setName(updClient.getName());
+
         Client returnClient = clientRepository.save(updateClientEntity);
 //
 //        // трансформируем данные из Entity в Dto и возвращаем пользователю
-//        return new Client(returnClient.getId(), returnClient.getName());
-        return returnClient;
+       // return new ClientDto(returnClient.getId(), returnClient.getName());
+        ClientDto clientDto = new ClientDto();
+        clientDto.setName(returnClient.getName());
+        return clientDto;
+//        return returnClient;
     }
 
     @Override

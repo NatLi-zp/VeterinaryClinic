@@ -1,7 +1,7 @@
 package com.example.veterinaryclinicnew.service;
 
+import com.example.veterinaryclinicnew.dto.ClientDto;
 import com.example.veterinaryclinicnew.entity.Client;
-import com.example.veterinaryclinicnew.entity.Pet;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ public interface ClientService {
 
     List<Client> getAllClients();
 
-    boolean createClients(Client newClient);
+    ClientDto createClients(ClientDto newClient);
 
-    Client updateClients(Client updClient);
+    ClientDto updateClients(ClientDto updClient);
 
     void deleteClients(int id);
 }

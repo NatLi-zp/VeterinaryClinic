@@ -1,9 +1,10 @@
 package com.example.veterinaryclinicnew.controller;
 
+import com.example.veterinaryclinicnew.dto.ClientDto;
 import com.example.veterinaryclinicnew.entity.Client;
-import com.example.veterinaryclinicnew.entity.Pet;
 import com.example.veterinaryclinicnew.service.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,12 +28,20 @@ public class ClientController {
     }
 
     @PostMapping //Jackson
-    public boolean createPets(@RequestBody Client newClient) { //insert
+    public ClientDto createClients(@RequestBody ClientDto newClient) { //insert
         return clientService.createClients(newClient);
     }
 
+//    // Создать нового клиента
+//    @PostMapping
+//    public ResponseEntity<Client> createClient(@RequestBody Client client) {
+//        Client savedClient = clientRepository.save(client);
+//        return ResponseEntity.status(201).body(savedClient);
+//    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public Client updateClients(@RequestBody Client updClient) { //update
+    public ClientDto updateClients(@RequestBody ClientDto updClient) { //update
         return clientService.updateClients(updClient);
     }
 

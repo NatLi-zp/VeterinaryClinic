@@ -19,8 +19,9 @@ import java.util.Objects;
 public class Client {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -32,6 +33,11 @@ public class Client {
     @JsonBackReference
     @OneToMany(mappedBy = "client")
     private List<Visit> visit;
+
+    public Client(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {
