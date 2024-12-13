@@ -42,32 +42,25 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDto createClients(ClientDto newClient) {
         //Client createClientEntity = new Client(0, newClient.getName(), newClient.getPet(), newClient.getVisit());
-        Client createClientEntity = new Client(); //null, newClient.getName());
-        createClientEntity.setName(newClient.getName());
-        createClientEntity.setId(100);
+//        Client createClientEntity = new Client(); //null, newClient.getName());
+//        createClientEntity.setName(newClient.getName());
+//        createClientEntity.setId(100);
+        Client createClientEntity = new Client(null, newClient.getName());
         Client returnClient = clientRepository.save(createClientEntity);
         //return returnClient;
-        //return new ClientDto(returnClient.getId(), returnClient.getName());
-        ClientDto clientDto = new ClientDto();
-        clientDto.setName(returnClient.getName());
-        return clientDto;
+        return new ClientDto(returnClient.getId(), returnClient.getName());
+//        ClientDto clientDto = new ClientDto();
+//        clientDto.setName(returnClient.getName());
+//        return clientDto;
     }
 
     @Override
     public ClientDto updateClients(ClientDto updClient) {
-        // Client updateClientEntity = new Client(updClient.getId(), updClient.getName(), updClient.getPet(), updClient.getVisit());
-     //   Client updateClientEntity = new Client(updClient.getId(), updClient.getName());
-        Client updateClientEntity = new Client();
-        updateClientEntity.setName(updClient.getName());
-
+        Client updateClientEntity = new Client(updClient.getId(), updClient.getName());
         Client returnClient = clientRepository.save(updateClientEntity);
-//
-//        // трансформируем данные из Entity в Dto и возвращаем пользователю
-       // return new ClientDto(returnClient.getId(), returnClient.getName());
-        ClientDto clientDto = new ClientDto();
-        clientDto.setName(returnClient.getName());
-        return clientDto;
-//        return returnClient;
+
+        // трансформируем данные из Entity в Dto и возвращаем пользователю
+        return new ClientDto(returnClient.getId(), returnClient.getName());
     }
 
     @Override
