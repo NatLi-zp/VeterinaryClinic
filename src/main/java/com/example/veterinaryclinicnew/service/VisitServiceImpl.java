@@ -7,7 +7,6 @@ import com.example.veterinaryclinicnew.entity.Client;
 import com.example.veterinaryclinicnew.entity.Pet;
 import com.example.veterinaryclinicnew.entity.Visit;
 import com.example.veterinaryclinicnew.exeption.VisitDoesntExistException;
-import com.example.veterinaryclinicnew.exeption.error_messages.ClientErrorMessage;
 import com.example.veterinaryclinicnew.exeption.error_messages.VisitErrorMessage;
 import com.example.veterinaryclinicnew.repository.VisitRepository;
 import lombok.RequiredArgsConstructor;

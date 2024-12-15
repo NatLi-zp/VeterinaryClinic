@@ -44,10 +44,9 @@ public class PetServiceImpl implements PetService {
     @Override
     public boolean createPets(PetDto newPet) {
         Client client = new Client(newPet.getClient().getId(), newPet.getClient().getName());
-        Pet createPetEntity = new Pet(null, newPet.getName(),client);
+        Pet createPetEntity = new Pet(null, newPet.getName(), client);
         Pet returnPet = petRepository.save(createPetEntity);
-        return createPetEntity.getId() != 0;
-        //  return createPetEntity.getId()!= null;
+        return createPetEntity.getId() != null;
         // return returnPet;
     }
 
@@ -60,7 +59,6 @@ public class PetServiceImpl implements PetService {
         // трансформируем данные из Entity в Dto и возвращаем пользователю
         ClientDto clientDto = new ClientDto(returnPet.getClient().getId(), returnPet.getClient().getName());
         return new PetDto(returnPet.getId(), returnPet.getName(), clientDto);
-        //return returnPet;
 
     }
 
