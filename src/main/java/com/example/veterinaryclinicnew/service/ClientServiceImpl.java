@@ -19,7 +19,7 @@ public class ClientServiceImpl implements ClientService {
     public final ClientRepository clientRepository;
 
     @Override
-    public Client getClientById(int id) {
+    public Client getClientById(Integer id) {
         Optional<Client> optionalClient = clientRepository.findById(id);
         if (!optionalClient.isPresent()) {
             throw new ClientDoesntExistException(ClientErrorMessage.CLIENT_NOT_EXIST);
@@ -33,7 +33,6 @@ public class ClientServiceImpl implements ClientService {
     public List<Client> getAllClients() {
         List<Client> clientsEntities = clientRepository.findAll();
         return clientsEntities.stream()
-                //       .map(entity -> new Client(entity.getId(), entity.getName(), entity.getPet(), entity.getVisit()))
                 .map(entity -> new Client(entity.getId(), entity.getName()))
                 .collect(Collectors.toList());
     }
@@ -41,17 +40,9 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public ClientDto createClients(ClientDto newClient) {
-        //Client createClientEntity = new Client(0, newClient.getName(), newClient.getPet(), newClient.getVisit());
-//        Client createClientEntity = new Client(); //null, newClient.getName());
-//        createClientEntity.setName(newClient.getName());
-//        createClientEntity.setId(100);
         Client createClientEntity = new Client(null, newClient.getName());
         Client returnClient = clientRepository.save(createClientEntity);
-        //return returnClient;
         return new ClientDto(returnClient.getId(), returnClient.getName());
-//        ClientDto clientDto = new ClientDto();
-//        clientDto.setName(returnClient.getName());
-//        return clientDto;
     }
 
     @Override
@@ -64,12 +55,13 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteClients(int id) {
+    public void deleteClients(Integer id) {
         // 1й вариант реализации метода delete, менее информативно
         clientRepository.deleteById(id);
 
 //        // 2й вариант реализации метода delete c предварит. поиском
 //        Client clients = clientRepository.findById(id).orElse(null);
+//        System.out.println("--------------------------------------------"+"clients: "+clients);
 //        if (clients == null) {
 //            throw new RuntimeException("Нет такого объекта с Id: " + id);
 //        } else {

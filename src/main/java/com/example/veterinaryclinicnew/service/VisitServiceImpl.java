@@ -1,5 +1,10 @@
 package com.example.veterinaryclinicnew.service;
 
+import com.example.veterinaryclinicnew.dto.ClientDto;
+import com.example.veterinaryclinicnew.dto.PetDto;
+import com.example.veterinaryclinicnew.dto.VisitDto;
+import com.example.veterinaryclinicnew.entity.Client;
+import com.example.veterinaryclinicnew.entity.Pet;
 import com.example.veterinaryclinicnew.entity.Visit;
 import com.example.veterinaryclinicnew.exeption.VisitDoesntExistException;
 import com.example.veterinaryclinicnew.exeption.error_messages.ClientErrorMessage;
@@ -19,7 +24,7 @@ public class VisitServiceImpl implements VisitService {
     public final VisitRepository visitRepository;
 
     @Override
-    public Visit getVisitById(int id) {
+    public Visit getVisitById(Integer id) {
         Optional<Visit> optionalVisit = visitRepository.findById(id);
         if (!optionalVisit.isPresent()) {
             throw new VisitDoesntExistException(VisitErrorMessage.VISIT_NOT_EXIST);
@@ -39,25 +44,37 @@ public class VisitServiceImpl implements VisitService {
 
 
     @Override
-    public boolean createVisits(Visit newVisit) {
-        Visit createVisitEntity = new Visit(0, newVisit.getDate(), newVisit.getComment(), newVisit.getClient(), newVisit.getPet());
+    public boolean createVisits(VisitDto newVisit) {
+
+        Client client = new Client(newVisit.getClient().getId(), newVisit.getClient().getName());
+        Pet pet = new Pet(newVisit.getPet().getId(), newVisit.getPet().getName(), client);
+
+        Visit createVisitEntity = new Visit(null, newVisit.getDate(), newVisit.getComment(), client, pet);
         Visit returnVisit = visitRepository.save(createVisitEntity);
+
         return createVisitEntity.getId() != 0;
 
     }
 
     @Override
-    public Visit updateVisits(Visit updVisit) {
-        Visit updateVisitEntity = new Visit(updVisit.getId(), updVisit.getDate(), updVisit.getComment(), updVisit.getClient(), updVisit.getPet());
+    public VisitDto updateVisits(VisitDto updVisit) {
+
+        Client client = new Client(updVisit.getClient().getId(), updVisit.getClient().getName());
+        Pet pet = new Pet(updVisit.getPet().getId(), updVisit.getPet().getName(), client);
+
+        Visit updateVisitEntity = new Visit(updVisit.getId(), updVisit.getDate(), updVisit.getComment(), client, pet);
         Visit returnVisit = visitRepository.save(updateVisitEntity);
-//
-//        // трансформируем данные из Entity в Dto и возвращаем пользователю
-//        return new Client(returnClient.getId(), returnClient.getName());
-        return returnVisit;
+
+        ClientDto clientDto = new ClientDto(returnVisit.getClient().getId(), returnVisit.getClient().getName());
+        PetDto petDto = new PetDto(returnVisit.getPet().getId(), returnVisit.getPet().getName(), clientDto);
+        VisitDto visitDto = new VisitDto(returnVisit.getId(), returnVisit.getDate(), returnVisit.getComment(), clientDto, petDto);
+
+        return visitDto;
+
     }
 
     @Override
-    public void deleteVisits(int id) {
+    public void deleteVisits(Integer id) {
         // 1й вариант реализации метода delete, менее информативно
         visitRepository.deleteById(id);
 

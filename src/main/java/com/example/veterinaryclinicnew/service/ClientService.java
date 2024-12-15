@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ClientService {
 
-    Client getClientById(int id);
+    Client getClientById(Integer id);
 
     List<Client> getAllClients();
 
@@ -15,5 +15,5 @@ public interface ClientService {
 
     ClientDto updateClients(ClientDto updClient);
 
-    void deleteClients(int id);
+    void deleteClients(Integer id);
 }

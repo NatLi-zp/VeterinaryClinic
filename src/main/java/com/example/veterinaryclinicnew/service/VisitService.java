@@ -1,18 +1,21 @@
 package com.example.veterinaryclinicnew.service;
 
+import com.example.veterinaryclinicnew.dto.ClientDto;
+import com.example.veterinaryclinicnew.dto.VisitDto;
 import com.example.veterinaryclinicnew.entity.Visit;
 
 import java.util.List;
 
 public interface VisitService {
 
-    Visit getVisitById(int id);
+    Visit getVisitById(Integer id);
 
     List<Visit> getAllVisits();
 
-    boolean createVisits(Visit newVisit);
+    boolean createVisits(VisitDto newVisit);
 
-    Visit updateVisits(Visit updVisit);
+    VisitDto updateVisits(VisitDto updVisit);
 
-    void deleteVisits(int id);
-}
+    void deleteVisits(Integer id);
+
+   }

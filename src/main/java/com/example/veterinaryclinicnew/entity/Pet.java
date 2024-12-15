@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -29,28 +27,13 @@ public class Pet {
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
-//    @ManyToOne
+//    public Pet(Integer id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
+
+    //    @ManyToOne
 //    @JoinColumn(name = "visit_id", referencedColumnName = "id")
 //    private Visit visit;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Pet pet = (Pet) o;
-        return id == pet.id && Objects.equals(name, pet.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
