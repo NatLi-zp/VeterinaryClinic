@@ -2,54 +2,54 @@
 server:
   port: 8088
 
-spring:
-  datasource:
-    url: jdbc:h2:mem:dev
-#    url: jdbc:h2:file:C:/java/h2/dev
-    driverClassName: org.h2.Driver
-    username: sa
-    password: sa
-
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: none  # Автогенерация таблиц (none/create/update)
-      naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-    show-sql: true
-
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-      settings:
-        trace: false
-        web-allow-others: false
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:dev
+##    url: jdbc:h2:file:C:/java/h2/dev
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password: sa
+#
+#  jpa:
+#    database-platform: org.hibernate.dialect.H2Dialect
+#    hibernate:
+#      ddl-auto: none  # Автогенерация таблиц (none/create/update)
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#    show-sql: true
+#
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#      settings:
+#        trace: false
+#        web-allow-others: false
 
 
 
 # --- mysql ------
-#spring:
-#  main:
-#    banner-mode: off
-#
-#  datasource:
-#      url: jdbc:mysql://localhost:3306/veterinary_clinic
-#      username: root
-#      password: 220606
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#
-##  sql:
-##    init:
-##      mode: always
-##      schema-locations: classpath:db/schema.sql
-##      data-locations: classpath:/db/data.sql
-#
-#  jpa:
-#    show-sql: true
-#    database-platform: org.hibernate.dialect.MySQLDialect
-#    hibernate:
-#      ddl-auto: none
+spring:
+  main:
+    banner-mode: off
+
+  datasource:
+      url: jdbc:mysql://localhost:3306/veterinary_clinic
+      username: root
+      password: 220606
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+#  sql:
+#    init:
+#      mode: always
+#      schema-locations: classpath:db/schema.sql
+#      data-locations: classpath:/db/data.sql
+
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: none
 
       # --- Liquibase ------
   liquibase:
