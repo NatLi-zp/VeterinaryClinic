@@ -1,6 +1,5 @@
 package com.example.veterinaryclinicnew;
 
-import com.example.veterinaryclinicnew.entity.Visit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

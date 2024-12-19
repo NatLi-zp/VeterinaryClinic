@@ -30,10 +30,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<Client> getAllClients() {
+    public List<ClientDto> getAllClients() {
         List<Client> clientsEntities = clientRepository.findAll();
         return clientsEntities.stream()
-                .map(entity -> new Client(entity.getId(), entity.getName()))
+                .map(entity -> new ClientDto(entity.getId(), entity.getName()))
                 .collect(Collectors.toList());
     }
 
