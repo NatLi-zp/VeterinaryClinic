@@ -18,7 +18,7 @@ import com.example.veterinaryclinicnew.service.ClientService;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import java.util.List;
-
+import org.springframework.security.test.context.support.WithMockUser;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -32,6 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @Sql("/schema.sql")
 @Sql("/data.sql")
+@WithMockUser(username = "user", password = "user", roles = "USER")
 //@WebMvcTest(ClientController.class)
 public class ClientControllerTest {
 
@@ -69,7 +70,8 @@ public class ClientControllerTest {
     @Test
     void getAllClients() throws Exception {
         when(clientServiceMock.getAllClients()).thenReturn(List.of(new ClientDto(1, "Test")));
-        this.mockMvc.perform(get("/client"))
+//        this.mockMvc.perform(get("/client"))
+        this.mockMvc.perform(get("/client/getAll"))
                 .andDo(print()) //печать лога вызова
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$..id").exists())

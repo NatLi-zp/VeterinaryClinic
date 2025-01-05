@@ -23,7 +23,7 @@ public class ClientController {
         return clientService.getClientById(id);
     }
 
-    @GetMapping  //select
+    @GetMapping("/getAll")  //select
     public List<ClientDto> getAllClients() {
         return clientService.getAllClients();
     }
